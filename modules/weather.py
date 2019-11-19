@@ -1,6 +1,5 @@
 import requests
 
-
 def get_weather(location):
     url = "https://community-open-weather-map.p.rapidapi.com/weather"
 
@@ -16,10 +15,10 @@ def get_weather(location):
         print(response.json())
         weather_response = response.json()
         output = f"Weather in {weather_response['name']}:"
-        output += f"\n Current Condition: {weather_response['weather'][0]['main']}-{weather_response['weather'][0]['description']}"
-        output += f"\n Current Temperature: {weather_response['main']['temp']} °C"
-        output += f"\n High: {weather_response['main']['temp_max']} °C"
-        output += f"\n Min: {weather_response['main']['temp_min']} °C"
+        output += f"\nCurrent Condition: {weather_response['weather'][0]['main']}-{weather_response['weather'][0]['description']}"
+        output += f"\nCurrent Temperature: {weather_response['main']['temp']} °C"
+        output += f"\nHigh: {weather_response['main']['temp_max']} °C"
+        output += f"\nMin: {weather_response['main']['temp_min']} °C"
     except:
         error_message = 'I couldn\'t get the weather info you asked for.'
         error_message += '\nPlease ask me something else, like:'
@@ -38,3 +37,5 @@ def get_weather(location):
         ],
         }
     return output
+
+
