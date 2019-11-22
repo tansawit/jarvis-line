@@ -10,11 +10,14 @@ def update_showing_list():
     c = conn.cursor()
     current_datetime = datetime.now()
 
-    last_checked_cursor = c.execute("SELECT lastChecked FROM showingStats ORDER BY ROWID ASC LIMIT 1").fetchone()
-    last_checked_datetime = datetime.strptime(last_checked_cursor[0], "%d/%m/%Y %H:%M:%S")
+    last_checked_cursor = c.execute(
+        "SELECT lastChecked FROM showingStats ORDER BY ROWID ASC LIMIT 1").fetchone()
+    last_checked_datetime = datetime.strptime(
+        last_checked_cursor[0], "%d/%m/%Y %H:%M:%S")
 
     time_since_last_update = current_datetime - last_checked_datetime
-    if time_since_last_update.seconds > (60 * 60 * 12):
+    print("days" in str(time_since_last_update))
+    if ("day" in str(time_since_last_update)) or ("days" in str(time_since_last_update)):
         print("Fetching New Movies")
         base_url = 'http://www.majorcineplex.com/th/main'
         page_response = requests.get(base_url)
@@ -141,3 +144,5 @@ def get_showing():
 
 
 get_showing()
+
+update_showing_list()
