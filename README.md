@@ -5,7 +5,7 @@ The idea for this came from my personal peeve of not liking to need to think abo
 
 Current feature set include:
 
-- Current weather and condition
-- Directions
-- World Clock
-- Movies in theaters and showtime
+- Current weather and condition ("weather in Bangkok", "Bangkok weather")
+- Directions ("Directions to the Grand Palace", "Siam Paragon directions")
+- Movies in theaters and showtime ("movies", "showtimes")
+
