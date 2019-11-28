@@ -18,14 +18,18 @@ TIME_ZONE_DB_API_KEY = str(os.environ.get("TIME_ZONE_DB_API_KEY"))
 def get_time(location):
     print(location)
     try:
-        mapquest_url = 'http://open.mapquestapi.com/nominatim/v1/search.php?key=' + MAPQUEST_CONSUMER_KEY + '&format=json&q=' + location + '&limit=1'
+        mapquest_url = 'http://open.mapquestapi.com/nominatim/v1/search.php?key=' + \
+            MAPQUEST_CONSUMER_KEY + '&format=json&q=' + location + '&limit=1'
+        print(1)
         r = requests.get(mapquest_url)
         location_data = r.json()
-        r = requests.get('http://api.timezonedb.com/?lat=' + location_data[0]['lat'] + '&lng=' + location_data[0][
-            'lon'] + '&format=json&key=' + TIME_ZONE_DB_API_KEY)
+        timezonedb_str = 'http://api.timezonedb.com/?lat=' + location_data[0]['lat'] + '&lng=' + location_data[0][
+            'lon'] + '&format=json&key=' + TIME_ZONE_DB_API_KEY
+        print(timezonedb_str)
+        r = requests.get(timezonedb_str)
         time_data = r.json()
-        time = datetime.utcfromtimestamp(time_data['timestamp']).strftime('%a %b %d %Y %H:%M:%S')
-        print(time)
+        time = datetime.utcfromtimestamp(
+            time_data['timestamp']).strftime('%a %b %d %Y %H:%M:%S')
         output = 'Location: ' + location_data[0]['display_name'] + '\nTime: ' + time + ' ' + time_data[
             'abbreviation']
 
@@ -37,14 +41,14 @@ def get_time(location):
         error_message += '\n  - time at paris'
         output = error_message
 
-    output = {"fulfillmentMessages": [
-        {
-            "text": {
-                "text": [
-                    output
-                ]
-            }
-        },
-    ],
-    }
-    return output
+        output_format = {"fulfillmentMessages": [
+            {
+                "text": {
+                    "text": [
+                        "test"
+                    ]
+                }
+            },
+        ],
+        }
+    return output_format

@@ -3,12 +3,6 @@ from os.path import join, dirname
 from pathlib import Path
 
 import requests
-from dotenv import load_dotenv
-
-dotenv_path = join(str(Path(dirname(__file__), '.env').parent.parent), '.env')
-print("====PATH=====")
-print(dotenv_path)
-load_dotenv(dotenv_path)
 
 GOOGLE_MAPS_API_KEY = str(os.environ.get("GOOGLE_MAPS_API_KEY"))
 
