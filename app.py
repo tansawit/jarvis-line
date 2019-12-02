@@ -38,7 +38,6 @@ def processRequest(req):
             weather_location = req_dict["queryResult"]["parameters"]["geo-country"]
         res = weather.get_weather(weather_location)
     elif intent == 'world-clock':
-        print(req_dict)
         if req_dict["queryResult"]["parameters"]["geo-city"]:
             clock_location = req_dict["queryResult"]["parameters"]["geo-city"]
         else:
@@ -47,7 +46,6 @@ def processRequest(req):
 
     # Knowledge Base
     elif "Knowledge.KnowledgeBase" in intent:
-        print("KNOWLEDGE")
         res = {"fulfillmentMessages": [
             {
                 "text": {
@@ -58,7 +56,6 @@ def processRequest(req):
             },
         ],
         }
-        print(res)
 
     # Personal Files/Links
     elif intent == 'resume':
@@ -105,9 +102,10 @@ def processRequest(req):
     # TEST
     elif intent == 'directions':
         directions_type, directions_location = \
-            next((k, v) for k, v in req_dict["queryResult"]["parameters"]["location"].items() if v)
-        print(directions_location)
-        res = directions.get_directions(directions_location.replace(' ', '%20'))
+            next((k, v) for k, v in req_dict["queryResult"]
+                 ["parameters"]["location"].items() if v)
+        res = directions.get_directions(
+            directions_location.replace(' ', '%20'))
     elif intent == 'showing':
         res = showing.get_showing()
     elif intent == 'test':
